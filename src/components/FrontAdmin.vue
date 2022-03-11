@@ -54,10 +54,6 @@ export default {
             this.$router.push('/login')
           })
       } else {
-        this.emitter.emit('push-message', {
-          style: 'danger',
-          title: '請先登入'
-        })
         this.$router.push('/login')
       }
     }
