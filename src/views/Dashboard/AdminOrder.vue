@@ -102,19 +102,18 @@ export default {
       delComponent.openModal()
     },
     updatePaid(item) {
-      this.isLoading = true
+      this.emitter.emit('loading')
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/order/${item.id}`
       const paid = {
         is_paid: item.is_paid
       }
       this.$http.put(api, { data: paid }).then((res) => {
-        this.emitter.emit('loading')
         const orderComponent = this.$refs.orderModal
         orderComponent.hideModal()
         this.getOrders(this.currentPage)
         this.$httpMessageState(res, res.data.message)
       }).catch((err) => {
-        alert(err)
+        this.$httpMessageState(err.response, '錯誤訊息')
       })
     },
     delOrder() {
