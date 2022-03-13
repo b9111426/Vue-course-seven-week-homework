@@ -89,7 +89,7 @@ export default {
       this.$http.get(url, this.tempProduct).then((response) => {
         this.coupons = response.data.coupons
       }).catch((err) => {
-        alert(err)
+        this.$httpMessageState(err.response, '錯誤訊息')
       })
     },
     updateCoupon(item, id) {
@@ -106,7 +106,7 @@ export default {
         this.$refs.couponModal.hideModal()
         this.$httpMessageState(res, '更新付款狀態')
       }).catch((err) => {
-        alert(err)
+        this.$httpMessageState(err.response, '錯誤訊息')
       })
     },
     delCoupon() {
